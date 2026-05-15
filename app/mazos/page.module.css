@@ -1,0 +1,418 @@
+/* ── Scene (sidebar + shell) ──────────────────────── */
+
+.scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(87, 111, 255, 0.75) 0%, transparent 40%),
+    radial-gradient(100% 100% at 100% 0%, rgba(161, 79, 255, 0.7) 0%, transparent 35%),
+    linear-gradient(135deg, #0e1f52 0%, #1c2f73 42%, #27316a 70%, #361f63 100%);
+  color: #f2f6ff;
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 190deg,
+    rgba(42, 198, 255, 0.22),
+    rgba(118, 88, 255, 0.12),
+    rgba(196, 114, 255, 0.22),
+    rgba(42, 198, 255, 0.22)
+  );
+  filter: blur(40px);
+  animation: gradientDrift 18s linear infinite;
+}
+
+/* ── Shell ─────────────────────────────────────────── */
+
+.shell {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  padding: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Top bar ───────────────────────────────────────── */
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.07));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 38px rgba(8, 14, 48, 0.42);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(180, 210, 255, 0.65);
+}
+
+.title {
+  margin: 0.2rem 0 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.countChip {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(220, 235, 255, 0.85);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.newBtn {
+  min-height: 40px;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #18315f;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 14px rgba(10, 20, 50, 0.2);
+}
+
+.newBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(10, 20, 50, 0.28);
+}
+
+/* ── Mazo grid ─────────────────────────────────────── */
+
+.mazoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  align-content: start;
+}
+
+/* ── Mazo card ─────────────────────────────────────── */
+
+.mazoCard {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(180deg, rgba(246, 249, 255, 0.97), rgba(232, 238, 252, 0.95));
+  color: #0f1a3f;
+  box-shadow: 0 14px 34px rgba(6, 14, 45, 0.38);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mazoCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 44px rgba(6, 14, 45, 0.46);
+}
+
+.mazoTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.subjectIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.materiaChip {
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.mazoTitulo {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0d1a3e;
+}
+
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  font-size: 0.8rem;
+  color: #3c4f7a;
+}
+
+.stat strong {
+  color: #0d1a3e;
+  font-weight: 800;
+}
+
+.statDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: #a8b8d8;
+}
+
+/* ── Progress ──────────────────────────────────────── */
+
+.progressWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(137, 174, 224, 0.22);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.4s ease;
+  min-width: 4px;
+}
+
+.progressLabel {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #2d4177;
+  min-width: 2.5rem;
+  text-align: right;
+}
+
+/* ── Card actions ──────────────────────────────────── */
+
+.mazoActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.practiceBtn {
+  flex: 1;
+  min-height: 40px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0f92af, #3a7cff);
+  color: #f3f8ff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(15, 146, 175, 0.3);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.practiceBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.deleteBtn {
+  min-height: 40px;
+  padding: 0 0.85rem;
+  border: 1.5px solid rgba(40, 78, 141, 0.16);
+  border-radius: 999px;
+  background: transparent;
+  color: #4c5b82;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.confirmRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.confirmMsg {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.confirmYes,
+.confirmNo {
+  min-height: 34px;
+  padding: 0 0.7rem;
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.confirmYes {
+  background: rgba(239, 68, 68, 0.14);
+  color: #b91c1c;
+}
+
+.confirmYes:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+.confirmNo {
+  background: rgba(40, 78, 141, 0.1);
+  color: #3a5faf;
+}
+
+.confirmNo:hover {
+  background: rgba(40, 78, 141, 0.18);
+}
+
+/* ── Empty state ───────────────────────────────────── */
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  border-radius: 22px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.emptyIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+  color: rgba(180, 210, 255, 0.55);
+}
+
+.emptyIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #f2f6ff;
+}
+
+.emptyDesc {
+  margin: 0;
+  color: rgba(180, 210, 255, 0.7);
+  max-width: 30ch;
+  line-height: 1.55;
+}
+
+.emptyAction {
+  min-height: 46px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #18315f;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.35rem;
+  box-shadow: 0 4px 14px rgba(10, 20, 50, 0.22);
+  transition: transform 0.18s ease;
+}
+
+.emptyAction:hover {
+  transform: translateY(-1px);
+}
+
+/* ── Keyframes ─────────────────────────────────────── */
+
+@keyframes gradientDrift {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.04); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .scene {
+    flex-direction: column;
+  }
+
+  .shell {
+    min-height: auto;
+  }
+
+  .mazoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,533 @@
+.scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(87, 111, 255, 0.75) 0%, transparent 40%),
+    radial-gradient(100% 100% at 100% 0%, rgba(161, 79, 255, 0.7) 0%, transparent 35%),
+    linear-gradient(135deg, #0e1f52 0%, #1c2f73 42%, #27316a 70%, #361f63 100%);
+  color: #f2f6ff;
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 190deg,
+    rgba(42, 198, 255, 0.25),
+    rgba(118, 88, 255, 0.15),
+    rgba(196, 114, 255, 0.25),
+    rgba(42, 198, 255, 0.25)
+  );
+  filter: blur(40px);
+  animation: gradientDrift 16s linear infinite;
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.06), transparent 35%),
+    repeating-linear-gradient(
+      130deg,
+      rgba(255, 255, 255, 0.035) 0 2px,
+      transparent 2px 10px
+    );
+}
+
+/* ── Shell (área de contenido a la derecha del sidebar) ── */
+
+.shell {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  padding: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Top bar ──────────────────────────────────────────── */
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.07));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 38px rgba(8, 14, 48, 0.42);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.iconAction,
+.avatarAction {
+  width: 40px;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 11px;
+  color: #1d2e58;
+  background: rgba(255, 255, 255, 0.92);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(10, 20, 50, 0.2);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.iconAction:hover,
+.avatarAction:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(10, 20, 50, 0.28);
+}
+
+.iconAction svg,
+.avatarAction svg {
+  width: 22px;
+  height: 22px;
+}
+
+.avatarAction {
+  border-radius: 999px;
+  color: #104f8a;
+  background: linear-gradient(145deg, #ffd6af, #f6a877);
+}
+
+/* ── Content grid (sin sidebar interno) ──────────────── */
+
+.contentGrid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(380px, 1fr) minmax(270px, 320px);
+  grid-template-rows: minmax(220px, 1fr) minmax(220px, 1fr);
+  gap: 1rem;
+}
+
+/* ── Tarjetas base ────────────────────────────────────── */
+
+.card {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(180deg, rgba(246, 249, 255, 0.97), rgba(232, 238, 252, 0.95));
+  color: #0f1a3f;
+  box-shadow: 0 16px 36px rgba(6, 14, 45, 0.4);
+}
+
+/* ── Bienvenida ───────────────────────────────────────── */
+
+.welcomeCard {
+  padding: 1.25rem 1.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.welcomeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.welcomeHeader h2 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+  font-weight: 800;
+}
+
+.aiChip {
+  border: 2px solid #4ec6f0;
+  color: #5971ff;
+  border-radius: 8px;
+  padding: 0.08rem 0.38rem;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  background: rgba(78, 198, 240, 0.08);
+}
+
+.welcomeCard p {
+  margin: 0;
+  color: #213063;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 44ch;
+}
+
+.practiceButton {
+  margin-top: auto;
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0f92af, #3a7cff);
+  color: #f3f8ff;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(15, 146, 175, 0.35);
+}
+
+.practiceButton:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(15, 146, 175, 0.5);
+}
+
+/* ── Progreso semanal ─────────────────────────────────── */
+
+.progressCard {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.progressCard h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.progressTop {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.progressTop p {
+  margin: 0;
+  max-width: 10ch;
+  font-size: 1.45rem;
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.progressCircle {
+  --progress: 68%;
+  width: 80px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(#5ec3df var(--progress), #d7e4f5 0);
+}
+
+.progressCircle::before {
+  content: "";
+  width: 60px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: #f2f7ff;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.progressCircle span {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #243568;
+}
+
+.chartBlock {
+  padding-top: 0.42rem;
+  border-top: 1px solid #c0cee2;
+}
+
+.chartBlock h4 {
+  margin: 0 0 0.45rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #3a4e7a;
+  font-weight: 700;
+}
+
+.hChart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.hRow {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr 1.6rem;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hRow span {
+  font-size: 0.74rem;
+  color: #334777;
+}
+
+.hRow strong {
+  font-size: 0.72rem;
+  text-align: right;
+  color: #2d4177;
+}
+
+.hTrack {
+  height: 14px;
+  border-radius: 5px;
+  background: rgba(137, 174, 224, 0.22);
+  overflow: hidden;
+}
+
+.hTrack div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6ecde8, #2f7bcf);
+  transition: width 0.4s ease;
+}
+
+.vChart {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.42rem;
+  height: 120px;
+  align-items: end;
+}
+
+.vCol {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 0.32rem;
+}
+
+.vBarWrap {
+  width: 100%;
+  height: 88px;
+  display: flex;
+  align-items: end;
+}
+
+.vBarWrap div {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, #4faede, #3569a8);
+  box-shadow: 0 4px 14px rgba(38, 89, 148, 0.24);
+  transition: height 0.4s ease;
+}
+
+.vCol span {
+  font-size: 0.6rem;
+  text-align: center;
+  color: #33487a;
+  line-height: 1.2;
+}
+
+/* ── Fila inferior ────────────────────────────────────── */
+
+.lowerGrid {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.tasksCard,
+.deckCard {
+  padding: 1rem 1.1rem;
+}
+
+.tasksCard h3,
+.deckCard h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.tasksCard ul {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.tasksCard li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.97rem;
+  color: #13224f;
+}
+
+.taskCheck {
+  width: 26px;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 1.5px solid #6278a9;
+  display: grid;
+  place-items: center;
+  color: #0b8bad;
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.checked {
+  background: rgba(124, 208, 255, 0.18);
+}
+
+.deckCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deckCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(6, 14, 45, 0.48);
+}
+
+.deckDropArea {
+  margin-top: 0.25rem;
+  border-radius: 13px;
+  border: 1.5px dashed #b6c5e3;
+  background: rgba(247, 250, 255, 0.75);
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: #6780ae;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.deckCard:hover .deckDropArea {
+  background: rgba(240, 245, 255, 0.88);
+  border-color: #8fa8d0;
+}
+
+.deckDropArea svg {
+  width: 30px;
+  height: 30px;
+}
+
+.deckDropArea p {
+  margin: 0;
+  max-width: 20ch;
+  font-size: 0.9rem;
+}
+
+.deckButton {
+  margin-top: auto;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  color: #f3f8ff;
+  background: linear-gradient(90deg, #2373d6, #2d8ae5);
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 12px rgba(35, 115, 214, 0.3);
+}
+
+/* ── Keyframes ────────────────────────────────────────── */
+
+@keyframes gradientDrift {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.04); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+  .contentGrid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+
+  .progressCard {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .lowerGrid {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .shell {
+    padding: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .lowerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tasksCard h3,
+  .deckCard h3 {
+    font-size: 1.1rem;
+  }
+
+  .progressTop p {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .scene {
+    flex-direction: column;
+  }
+
+  .shell {
+    padding: 0.75rem;
+    min-height: auto;
+  }
+}

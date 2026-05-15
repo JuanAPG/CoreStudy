@@ -1,5 +1,5 @@
 {
-  "name": "edubrainai",
+  "name": "core-study-ai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/pg": "^8.20.0",
+    "bcryptjs": "^3.0.3",
+    "groq-sdk": "^1.1.2",
+    "mammoth": "^1.11.0",
     "next": "16.1.6",
+    "next-auth": "^4.24.13",
+    "pdf-parse": "^2.4.5",
+    "pg": "^8.20.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
